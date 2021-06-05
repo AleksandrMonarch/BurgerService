@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Burger Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+<h1>Design your burger!</h1>
+<img th:src="@{/images/image.jpg}"/>
+
+<form method="POST" th:object="${Burger}">
+    <div class="grid">
+        <div class="ingredient-group" id="wraps">
+            <h3>Designate your ingredients:</h3>
+            <div th:each="ingredient : ${Ingredients}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
+                />
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Name your burger creation:</h3>
+        <input type="text" th:field="*{name}"/>
+        <br/>
+        <button>Submit your burger</button>
+    </div>
+</form>
+</body>
+</html>
