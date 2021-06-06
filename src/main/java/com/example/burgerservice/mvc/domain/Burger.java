@@ -10,4 +10,5 @@ public class Burger {
     private String id;
     private String name;
     private List<Ingredient> ingredients;
+//    private List<String> ingredients;
 }

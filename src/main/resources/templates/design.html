@@ -10,13 +10,12 @@
 <h1>Design your burger!</h1>
 <img th:src="@{/images/image.jpg}"/>
 
-<form method="POST" th:object="${Burger}">
+<form method="POST" th:object="${burger}">
     <div class="grid">
         <div class="ingredient-group" id="wraps">
             <h3>Designate your ingredients:</h3>
-            <div th:each="ingredient : ${Ingredients}">
-                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"
-                />
+            <div th:each="ingredient : ${ingredients}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
                 <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
         </div>

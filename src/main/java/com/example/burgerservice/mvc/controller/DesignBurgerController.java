@@ -1,13 +1,14 @@
 package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.Burger;
-import com.example.burgerservice.mvc.domain.Design;
+//import com.example.burgerservice.mvc.domain.Design;
 import com.example.burgerservice.mvc.domain.Ingredient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,19 +20,19 @@ public class DesignBurgerController {
     @GetMapping()
     public String getDesignForm(Model model) {
         List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("CHS", "Chedder", Ingredient.Type.CHEESE),
-                new Ingredient("BBQ", "Hiqnz", Ingredient.Type.SOUSE),
-                new Ingredient("MT", "Beef", Ingredient.Type.MEAT)
+                new Ingredient("CHS", "Cheddar", Ingredient.Type.CHEESE),
+                new Ingredient("BBQ", "Barbecue", Ingredient.Type.SOUSE),
+                new Ingredient("BF", "Beef", Ingredient.Type.MEAT)
         );
-        model.addAttribute("Ingredients", ingredients);
-        model.addAttribute("Burger", new Design());
+        model.addAttribute("ingredients", ingredients);
+        model.addAttribute("burger", new Burger());
 
         return "design";
     }
 
     @PostMapping
-    public String processDesign(Design design) {
-        System.out.println(design);
+    public String processDesign(Burger burger) {
+        System.out.println(burger);
         return "home";
     }
 }
