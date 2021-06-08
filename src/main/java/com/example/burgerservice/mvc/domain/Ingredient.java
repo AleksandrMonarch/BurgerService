@@ -2,13 +2,13 @@ package com.example.burgerservice.mvc.domain;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Data
 public class Ingredient {
 
-    private static List<Ingredient> ingredients = new ArrayList<>();
+    private static final Map<String, Ingredient> ingredients = new TreeMap<>();
 
     private final String id;
     private final String name;
@@ -18,7 +18,7 @@ public class Ingredient {
         this.id = id;
         this.name = name;
         this.type = type;
-        ingredients.add(this);
+        if (!ingredients.containsKey(id)) ingredients.put(id, this);
     }
 
     public static enum Type {
@@ -29,7 +29,7 @@ public class Ingredient {
         LETTUCE
     }
 
-    public static List<Ingredient> getIngredients() {
-        return ingredients;
+    public static Ingredient getIngredient(String key) {
+        return ingredients.get(key);
     }
 }
