@@ -14,7 +14,23 @@
     <div class="grid">
         <div class="ingredient-group" id="wraps">
             <h3>Designate your ingredients:</h3>
-            <div th:each="ingredient : ${ingredients}">
+            <h4>Cheese ingredients</h4>
+            <div th:each="ingredient : ${CHEESE}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+            <h4>Souse ingredients</h4>
+            <div th:each="ingredient : ${SOUSE}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+            <h4>Wrap ingredients</h4>
+            <div th:each="ingredient : ${WRAP}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+            <h4>Meat ingredients</h4>
+            <div th:each="ingredient : ${MEAT}">
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
                 <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
