@@ -46,7 +46,6 @@ public class DesignBurgerController {
         log.info("save {} to order", burger);
         //сохранение бургера
         return "redirect:/orders/current";
-//        return "redirect:https://mcdonalds.ru/";
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.Type type) {
