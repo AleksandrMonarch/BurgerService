@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Burger Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/styless.css}" />
 </head>
 
 <body>
@@ -41,6 +41,8 @@
     <div>
         <h3>Name your burger creation:</h3>
         <input type="text" th:field="*{name}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
         <br/>
         <button>Submit your burger</button>
     </div>

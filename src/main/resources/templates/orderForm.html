@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Current order</title>
+    <link rel="stylesheet" th:href="@{/styless.css}" />
 </head>
 <body>
 <h1>Your burger is preparing. Let's fill the delivery form</h1>
@@ -25,8 +26,11 @@
         <input type="text" id="creditCardExpiration" placeholder="Credit card expiration" th:field="*{ccExpiration}"><br>
         <label for="cvv">CVV</label>
         <input type="text" id="cvv" placeholder="CVV" th:field="*{ccCVV}"><br>
-        <button>Confirm your delivery</button>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">CVV error</span>
     </div>
+    <button>Confirm your delivery</button>
+
 </form>
 </body>
 </html>
