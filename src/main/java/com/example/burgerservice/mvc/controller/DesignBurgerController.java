@@ -2,6 +2,7 @@ package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.Burger;
 import com.example.burgerservice.mvc.domain.Ingredient;
+import com.example.burgerservice.service.BurgerHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,7 @@ public class DesignBurgerController {
         }
         log.info("save {} to order", burger);
         //сохранение бургера
+        BurgerHistoryService.saveBurger(burger);
         return "redirect:/orders/current";
     }
 
