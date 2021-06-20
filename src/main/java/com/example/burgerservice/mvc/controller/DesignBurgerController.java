@@ -31,15 +31,14 @@ public class DesignBurgerController {
     }
 
     @PostMapping
-    public String processDesign(@Valid Burger burger, Errors error, Model model) {
+    public String processDesign(@Valid Burger burger, Errors error, Model model, BurgerHistoryService burgerHistoryService) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());
             return "design";
         }
-        log.info("save {} to order", burger);
         //сохранение бургера
-        BurgerHistoryService.saveBurger(burger);
+        log.info("save {} to order", burgerHistoryService.saveBurger(burger));
         return "redirect:/orders/current";
     }
 
