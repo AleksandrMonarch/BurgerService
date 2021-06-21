@@ -1,9 +1,9 @@
-package com.example.burgerservice.service;
+package com.example.burgerservice.mvc.service;
 
 import com.example.burgerservice.mvc.domain.Burger;
 import com.example.burgerservice.mvc.domain.Ingredient;
 import lombok.Data;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@Service
+@Component
 public class BurgerHistoryService {
 
     private static long maxId = 0;

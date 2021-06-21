@@ -1,35 +1,44 @@
 package com.example.burgerservice.mvc.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Map;
-import java.util.TreeMap;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "INGREDIENT")
+@NoArgsConstructor(force = true)
 public class Ingredient {
 
-    private static final Map<String, Ingredient> ingredients = new TreeMap<>();
-
+    @Id
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "ID")
     private final String id;
-    private final String name;
-    private final Type type;
 
-    public Ingredient(String id, String name, Type type) {
+    @Column(name = "NAME")
+    private final String name;
+
+//    @Column(name = "TYPE")
+//    private final Type type;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID")
+    private IngredientType type;
+
+    public Ingredient(String id, String name, IngredientType type) {
         this.id = id;
         this.name = name;
         this.type = type;
-        if (!ingredients.containsKey(id)) ingredients.put(id, this);
     }
 
-    public static enum Type {
-        CHEESE,
-        SOUSE,
-        WRAP,
-        MEAT,
-        LETTUCE
-    }
-
-    public static Ingredient getIngredient(String key) {
-        return ingredients.get(key);
-    }
+//    public static enum Type {
+//        CHEESE,
+//        SOUSE,
+//        WRAP,
+//        MEAT,
+//        LETTUCE
+//    }
 }
