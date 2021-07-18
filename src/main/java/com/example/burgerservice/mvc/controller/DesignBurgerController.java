@@ -1,42 +1,36 @@
 package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.Burger;
+import com.example.burgerservice.mvc.domain.BurgerOrder;
 import com.example.burgerservice.mvc.domain.Ingredient;
 import com.example.burgerservice.mvc.domain.IngredientType;
-import com.example.burgerservice.mvc.repository.IngredientTypeRepository;
-import com.example.burgerservice.mvc.service.BurgerHistoryService;
-import com.example.burgerservice.mvc.service.IngredientService;
+import com.example.burgerservice.mvc.service.impl.IngredientServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("burgerOrder")
 public class DesignBurgerController {
 
-    private final IngredientService ingredientService;
-
-    private final IngredientTypeRepository ingredientTypeRepository;
+    private final IngredientServiceImpl ingredientServiceImpl;
 
     @Autowired
-    public DesignBurgerController(IngredientService ingredientService,
-                                  IngredientTypeRepository ingredientTypeRepository) {
-        this.ingredientService = ingredientService;
-        this.ingredientTypeRepository = ingredientTypeRepository;
+    public DesignBurgerController(IngredientServiceImpl ingredientServiceImpl) {
+        this.ingredientServiceImpl = ingredientServiceImpl;
     }
 
     @GetMapping()
@@ -46,14 +40,16 @@ public class DesignBurgerController {
     }
 
     @PostMapping
-    public String processDesign(@Valid Burger burger, Errors error, Model model, BurgerHistoryService burgerHistoryService) {
+    public String processDesign(@Valid Burger burger, Errors error,
+                                @ModelAttribute BurgerOrder burgerOrder) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());
             return "design";
         }
         //сохранение бургера
-        log.info("save {} to order", burgerHistoryService.saveBurger(burger));
+        log.info("save {} to order", burger);
+        burgerOrder.addBurger(burger);
         return "redirect:/orders/current";
     }
 
@@ -65,7 +61,7 @@ public class DesignBurgerController {
     }
 
     private Iterable<Ingredient> getIngredientsList() {
-        return ingredientService.getAllIngredients();
+        return ingredientServiceImpl.getAllIngredients();
     }
 
     @PostConstruct
@@ -85,22 +81,29 @@ public class DesignBurgerController {
                 new Ingredient("PK", "Pork", meatType),
                 new Ingredient("WS", "Wrap with sesame", wrapType)
         );
-        ingredientService.saveIngredients(ingredients);
+        ingredientServiceImpl.saveIngredients(ingredients);
     }
 
     @ModelAttribute
     private void filterAtIngredients(Model model) {
 
-        Iterable<Ingredient> ingredients = getIngredientsList();
+        List<Ingredient> ingredients = ingredientServiceImpl.getAllIngredients();
 
-        List<Ingredient> result = new ArrayList<>();
+        Set<IngredientType> ingredientTypes = fetchAllIngredientTypes(ingredients);
 
-        ingredients.forEach(result::add);
-
-        Iterable<IngredientType> types = ingredientTypeRepository.findAll();
-
-        for (IngredientType type : types) {
-            model.addAttribute(type.getName().toUpperCase(), filterByType(result, type));
+        for (IngredientType type : ingredientTypes) {
+            model.addAttribute(type.getName().toUpperCase(), filterByType(ingredients, type));
         }
+    }
+
+    @ModelAttribute("burgerOrder")
+    private BurgerOrder getOrder() {
+        return new BurgerOrder();
+    }
+
+    private Set<IngredientType> fetchAllIngredientTypes(Iterable<Ingredient> ingredients) {
+        return StreamSupport.stream(ingredients.spliterator(), false)
+                .map(Ingredient::getType)
+                .collect(Collectors.toSet());
     }
 }

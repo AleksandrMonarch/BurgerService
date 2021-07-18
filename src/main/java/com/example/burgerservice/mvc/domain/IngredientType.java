@@ -1,8 +1,7 @@
 package com.example.burgerservice.mvc.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.NoArgsConstructor;;
 
 import javax.persistence.*;
 

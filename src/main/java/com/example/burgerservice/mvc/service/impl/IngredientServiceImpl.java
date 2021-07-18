@@ -1,4 +1,4 @@
-package com.example.burgerservice.mvc.service;
+package com.example.burgerservice.mvc.service.impl;
 
 import com.example.burgerservice.mvc.domain.Ingredient;
 import com.example.burgerservice.mvc.repository.IngredientRepository;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class IngredientService {
+public class IngredientServiceImpl {
 
     private final IngredientRepository ingredientRepository;
 
     @Autowired
-    public IngredientService(IngredientRepository ingredientRepository) {
+    public IngredientServiceImpl(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
 
@@ -25,7 +25,7 @@ public class IngredientService {
         ingredientRepository.saveAll(ingredients);
     }
 
-    public Iterable<Ingredient> getAllIngredients() {
-        return ingredientRepository.findAll();
+    public List<Ingredient> getAllIngredients() {
+        return ingredientRepository.getAllIngredients();
     }
 }

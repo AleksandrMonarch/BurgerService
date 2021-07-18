@@ -1,15 +1,19 @@
 package com.example.burgerservice.mvc.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
 @Entity
 @Table(name = "INGREDIENT")
 @NoArgsConstructor(force = true)
+@Getter
+@Setter
 public class Ingredient {
 
     @Id
@@ -28,17 +32,12 @@ public class Ingredient {
     @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID")
     private IngredientType type;
 
+    @ManyToMany(mappedBy = "ingredients")
+    private List<Burger> burgers = new ArrayList<>();
+
     public Ingredient(String id, String name, IngredientType type) {
         this.id = id;
         this.name = name;
         this.type = type;
     }
-
-//    public static enum Type {
-//        CHEESE,
-//        SOUSE,
-//        WRAP,
-//        MEAT,
-//        LETTUCE
-//    }
 }

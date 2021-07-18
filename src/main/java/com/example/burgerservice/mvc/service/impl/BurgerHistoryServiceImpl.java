@@ -1,4 +1,4 @@
-package com.example.burgerservice.mvc.service;
+package com.example.burgerservice.mvc.service.impl;
 
 import com.example.burgerservice.mvc.domain.Burger;
 import com.example.burgerservice.mvc.domain.Ingredient;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Component
-public class BurgerHistoryService {
+public class BurgerHistoryServiceImpl {
 
     private static long maxId = 0;
 
@@ -40,7 +40,7 @@ public class BurgerHistoryService {
     }
 
     public Burger saveBurger(Burger burger) {
-        Operation operation = BurgerHistoryService.this.new Operation(burger);
+        Operation operation = BurgerHistoryServiceImpl.this.new Operation(burger);
         operations.add(operation);
         return burger;
     }
