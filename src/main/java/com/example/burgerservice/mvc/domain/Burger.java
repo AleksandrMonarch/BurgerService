@@ -37,7 +37,7 @@ public class Burger {
             inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID", referencedColumnName = "ID"))
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
     private BurgerOrder burgerOrder;
 

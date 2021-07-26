@@ -17,18 +17,16 @@ import java.util.List;
 public class Ingredient {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "ID")
-    private final String id;
+    private String id;
 
     @Column(name = "NAME")
-    private final String name;
+    private String name;
 
 //    @Column(name = "TYPE")
 //    private final Type type;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID")
     private IngredientType type;
 

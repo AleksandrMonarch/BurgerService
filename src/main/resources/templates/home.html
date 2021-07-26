@@ -9,5 +9,20 @@
 <body>
 <h1>Welcome to Surer Burger Service</h1>
 <a href="/menu">Introduce with our menu</a>
+
+<h2>Find order by address</h2>
+<form method="post">
+    <div class="address-group" id="address" th:object="${searchingAddress}">
+        <label for="street">Street</label>
+        <input type="text" id="street" placeholder="Street" th:field="*{street}"><br>
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="City" th:field="*{city}"><br>
+        <label for="state">State</label>
+        <input type="text" id="state" placeholder="State" th:field="*{state}"><br>
+        <label for="zipNumber">Zip number</label>
+        <input type="text" id="zipNumber" placeholder="Zip number" th:field="*{zipNumber}"><br>
+    </div>
+    <button>Search</button>
+</form>
 </body>
 </html>

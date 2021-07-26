@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,32 +28,27 @@ public class BurgerOrder {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "DELIVERY_NAME")
-    private String deliveryName;
+    @Column(name = "ORDER_NAME")
+    private String orderName;
 
-    @Column(name = "DELIVERY_STREET")
-    private String deliveryStreet;
+    @Column(name = "CREATE_AT")
+    private LocalDateTime createdAt;
 
-    @Column(name = "DELIVERY_CITY")
-    private String deliveryCity;
-
-    @Column(name = "DELIVERY_STATE")
-    private String deliveryState;
-
-    @Column(name = "DELIVERY_ZIP")
-    private String deliveryZip;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
+    private Address address;
 
 //    @CreditCardNumber(message = "not valid credit card number")
-    @Column(name = "CC_NUMBER")
-    private String ccNumber;
-
+//    @Column(name = "CC_NUMBER")
+//    private String ccNumber;
+//
 //    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\\\/])([1-9][0-9])$", message = "not valid expiration date")
-    @Column(name = "CC_EXPIRATION")
-    private String ccExpiration;
-
-    @Column(name = "CC_CVV")
-    @Digits(integer = 3, message = "not valid ccCVV", fraction = 0)
-    private String ccCVV;
+//    @Column(name = "CC_EXPIRATION")
+//    private String ccExpiration;
+//
+//    @Column(name = "CC_CVV")
+//    @Digits(integer = 3, message = "not valid ccCVV", fraction = 0)
+//    private String ccCVV;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "burgerOrder")
     private List<Burger> burgers = new ArrayList<>();
@@ -73,5 +69,28 @@ public class BurgerOrder {
         }
         burgers.remove(burger);
         burger.setBurgerOrder(null);
+    }
+
+    public void addAddress(Address address) {
+        if (Objects.isNull(address)) {
+            log.error("null address found");
+            return;
+        }
+        this.address = address;
+        address.getBurgerOrders().add(this);
+    }
+
+    public void removeAddress(Address address) {
+        if (Objects.isNull(address)) {
+            log.error("null address found");
+            return;
+        }
+        this.address = null;
+        address.getBurgerOrders().remove(this);
+    }
+
+    @PrePersist
+    public void initializeCreatedDateField() {
+        this.createdAt = LocalDateTime.now();
     }
 }

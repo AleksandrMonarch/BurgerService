@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search result</title>
+</head>
+<body>
+    <div class="burgerOrder-group" id="burgerOrder" th:each="burgerOrder : ${searchResult}">
+        <h1><span th:text="${burgerOrder.orderName}">ORDER NAME</span></h1>
+        <div class="burger-group" id="burger" th:each="burger : ${burgerOrder.getBurgers()}">
+            <h2><span th:text="${burger.getName()}">BURGER NAME</span></h2>
+            <div class="ingredient-group" id="ingredient" th:each="ingredient : ${burger.getIngredients()}">
+                <h3><span th:text="${ingredient.name}">INGREDIENT NAME</span></h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

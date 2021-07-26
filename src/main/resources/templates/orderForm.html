@@ -3,34 +3,37 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Current order</title>
+    <title>Current burgerOrder</title>
     <link rel="stylesheet" th:href="@{/styless.css}" />
 </head>
 <body>
 <h1>Your burger is preparing. Let's fill the delivery form</h1>
-<form method="post" th:object="${order}">
-    <div class="order-group" id="order">
+<form method="post">
+    <div class="burgerOrder-group" id="burgerOrder" th:object="${burgerOrder}">
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="name" th:field="*{deliveryName}"><br>
+<!--        There is a problem with field name in burger and burgerOrder name-->
+        <input type="text" id="name" placeholder="name" th:field="*{orderName}">
+    </div>
+    <div class="address-group" id="address" th:object="${address}">
         <label for="street">Street</label>
-        <input type="text" id="street" placeholder="Street" th:field="*{deliveryStreet}"><br>
+        <input type="text" id="street" placeholder="Street" th:field="*{street}"><br>
         <label for="city">City</label>
-        <input type="text" id="city" placeholder="City" th:field="*{deliveryCity}"><br>
+        <input type="text" id="city" placeholder="City" th:field="*{city}"><br>
         <label for="state">State</label>
-        <input type="text" id="state" placeholder="State" th:field="*{deliveryState}"><br>
+        <input type="text" id="state" placeholder="State" th:field="*{state}"><br>
         <label for="zip">Zip</label>
-        <input type="text" id="zip" placeholder="Zip" th:field="*{deliveryZip}"><br>
-        <label for="creditCardNumber">Number of credit card</label>
+        <input type="text" id="zip" placeholder="Zip" th:field="*{zipNumber}"><br>
+<!--        <label for="creditCardNumber">Number of credit card</label>
         <input type="text" id="creditCardNumber" placeholder="Number of credit card" th:field="*{ccNumber}"><br>
         <label for="creditCardExpiration">Credit card expiration</label>
         <input type="text" id="creditCardExpiration" placeholder="Credit card expiration" th:field="*{ccExpiration}"><br>
         <label for="cvv">CVV</label>
         <input type="text" id="cvv" placeholder="CVV" th:field="*{ccCVV}"><br>
         <span class="validationError"
-              th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">CVV error</span>
+              th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">CVV error</span>-->
     </div>
     <button>Confirm your delivery</button>
-
 </form>
+<a href="/design">Add another burger</a>
 </body>
 </html>
