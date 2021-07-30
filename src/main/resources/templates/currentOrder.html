@@ -6,10 +6,10 @@
     <title>Current order</title>
 </head>
 <body>
-<div class="burgerOrder-group" id="burgerOrder" th:object="${burgerOrder}">
-    <h1>Your order <span th:text="${burgerOrder.orderName}">"ORDER NAME"</span> is preparing</h1>
+<div class="burgerOrder-group" id="burgerOrder" th:object="${currentOrder}">
+    <h1>Your order <span th:text="${currentOrder.orderName}">"ORDER NAME"</span> is preparing</h1>
     <h2>Order details</h2>
-    <div class="burger-group" id="orderBurgers" th:each="burger : ${burgers}">
+    <div class="burger-group" id="orderBurgers" th:each="burger : ${currentOrder.getBurgers()}">
         <h3>Burger name: <span th:text="${burger.name}">BURGER NAME</span></h3>
         <div class = "ingredient-group" id="burgerIngredient" th:each="intgredient : ${burger.getIngredients()}">
             <span th:text="${intgredient.name}">INGREDIENT NAME</span>
@@ -23,6 +23,17 @@
         <h3><span th:text="${address.zipNumber}">BURGER NAME</span></h3>
     </div>
 </div>
+
+<!--<form method="GET" th:object="${ingredients}">-->
+<!--    <h2>Show burgers contains ingredients</h2>-->
+<!--    <div class="ingredient-group" id="ingredient" th:each="ingredient : ${ingredients}">-->
+<!--        <input name="ingredient" type="checkbox" th:value="${ingredient.id}"/>-->
+<!--        <span th:text="${ingredient.name}">INGREDIENT</span><br/>-->
+<!--    </div>-->
+<!--    <button>Show burgers</button>-->
+<!--</form>-->
+
 <a th:href="@{updateOrder}">Do you want to update your order?</a>
+
 </body>
 </html>

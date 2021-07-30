@@ -19,13 +19,14 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public String findAddressIdByStreetAndCityAndStateAndZipNumber(Address address) {
-        Address result = addressRepository
-                .getAddressByStreetEqualsAndCityEqualsAndStateEqualsAndZipNumberEquals(address.getStreet(),
-                        address.getCity(), address.getState(), address.getZipNumber());
-        if (Objects.nonNull(result)) {
-            return result.getId();
+    public Address getEqualsAddressFromBDIfExists(Address newAddress) {
+
+        Address oldAddress = addressRepository
+                 .getAddressByStreetEqualsAndCityEqualsAndStateEqualsAndZipNumberEquals(newAddress.getStreet(),
+                         newAddress.getCity(), newAddress.getState(), newAddress.getZipNumber());
+        if (Objects.nonNull(oldAddress)) {
+            return oldAddress;
         }
-        return null;
+        return newAddress;
     }
 }

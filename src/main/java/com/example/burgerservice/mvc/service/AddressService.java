@@ -4,5 +4,5 @@ import com.example.burgerservice.mvc.domain.Address;
 
 public interface AddressService {
 
-    String findAddressIdByStreetAndCityAndStateAndZipNumber(Address address);
+    Address getEqualsAddressFromBDIfExists(Address newAddress);
 }

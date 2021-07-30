@@ -34,7 +34,7 @@ public class BurgerOrder {
     @Column(name = "CREATE_AT")
     private LocalDateTime createdAt;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
     private Address address;
 
