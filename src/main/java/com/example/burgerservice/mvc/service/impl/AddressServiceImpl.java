@@ -19,7 +19,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getEqualsAddressFromBDIfExists(Address newAddress) {
+    public Address getEqualsAddressFromDBIfExists(Address newAddress) {
 
         Address oldAddress = addressRepository
                  .getAddressByStreetEqualsAndCityEqualsAndStateEqualsAndZipNumberEquals(newAddress.getStreet(),

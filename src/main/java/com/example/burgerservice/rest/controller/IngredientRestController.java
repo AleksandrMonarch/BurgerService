@@ -1,16 +1,20 @@
 package com.example.burgerservice.rest.controller;
 
 import com.example.burgerservice.rest.dto.Ingredient;
+import com.example.burgerservice.rest.dto.IngredientListWrapper;
 import com.example.burgerservice.rest.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/ingredient")
+@RequestMapping(
+        value = "/api/ingredient",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class IngredientRestController {
 
     private final IngredientService ingredientService;
@@ -21,8 +25,13 @@ public class IngredientRestController {
     }
 
     @PostMapping
-    public ResponseEntity saveIngredient(@RequestBody Ingredient ingredient) {
+    public ResponseEntity saveIngredient(@RequestBody @Valid Ingredient ingredient) {
         ingredientService.saveIngredient(ingredient);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<IngredientListWrapper> getAllIngredients() {
+        return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 }

@@ -4,5 +4,5 @@ import com.example.burgerservice.mvc.domain.Address;
 
 public interface AddressService {
 
-    Address getEqualsAddressFromBDIfExists(Address newAddress);
+    Address getEqualsAddressFromDBIfExists(Address newAddress);
 }

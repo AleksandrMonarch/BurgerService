@@ -10,7 +10,7 @@ import lombok.Data;
 public class Address {
 
     @JsonIgnore
-    private Integer id;
+    private String id;
 
     private String street;
 

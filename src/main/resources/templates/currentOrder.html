@@ -6,10 +6,10 @@
     <title>Current order</title>
 </head>
 <body>
-<div class="burgerOrder-group" id="burgerOrder" th:object="${currentOrder}">
-    <h1>Your order <span th:text="${currentOrder.orderName}">"ORDER NAME"</span> is preparing</h1>
+<div class="burgerOrder-group" id="burgerOrder" th:object="${burgerOrder}">
+    <h1>Your order <span th:text="${burgerOrder.getName()}">"ORDER NAME"</span> is preparing</h1>
     <h2>Order details</h2>
-    <div class="burger-group" id="orderBurgers" th:each="burger : ${currentOrder.getBurgers()}">
+    <div class="burger-group" id="orderBurgers" th:each="burger : ${burgerOrder.getBurgers()}">
         <h3>Burger name: <span th:text="${burger.name}">BURGER NAME</span></h3>
         <div class = "ingredient-group" id="burgerIngredient" th:each="intgredient : ${burger.getIngredients()}">
             <span th:text="${intgredient.name}">INGREDIENT NAME</span>

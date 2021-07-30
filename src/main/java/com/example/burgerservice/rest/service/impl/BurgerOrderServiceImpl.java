@@ -28,4 +28,12 @@ public class BurgerOrderServiceImpl implements BurgerOrderService {
                         .findById(id)
                         .orElseThrow(EntityNotFoundException::new));
     }
+
+    @Override
+    public BurgerOrder updateBurgerOrder(String id, BurgerOrder newBurgerOrder) {
+        return burgerOrderMapper.burgerOrderDao2Dto(
+                orderRepository.save(
+                        burgerOrderMapper.burgerOrderDto2Dao(newBurgerOrder))
+        );
+    }
 }

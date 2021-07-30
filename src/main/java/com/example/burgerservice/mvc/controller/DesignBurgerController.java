@@ -126,7 +126,7 @@ public class DesignBurgerController {
         address1.setStreet("Nevsky avenue");
         address1.setZipNumber("195999");
 
-        address1 = addressService.getEqualsAddressFromBDIfExists(address1);
+        address1 = addressService.getEqualsAddressFromDBIfExists(address1);
 
         order1.addAddress(address1);
 
@@ -142,7 +142,7 @@ public class DesignBurgerController {
         address2.setStreet("Red Square");
         address2.setZipNumber("199555");
 
-        address2 = addressService.getEqualsAddressFromBDIfExists(address2);
+        address2 = addressService.getEqualsAddressFromDBIfExists(address2);
 
         order2.addAddress(address2);
 

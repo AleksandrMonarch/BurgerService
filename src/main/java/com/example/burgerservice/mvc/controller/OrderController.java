@@ -1,9 +1,7 @@
 package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.Address;
-import com.example.burgerservice.mvc.domain.Burger;
 import com.example.burgerservice.mvc.domain.BurgerOrder;
-import com.example.burgerservice.mvc.domain.Ingredient;
 import com.example.burgerservice.mvc.service.AddressService;
 import com.example.burgerservice.mvc.service.IngredientService;
 import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
@@ -15,8 +13,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -42,20 +38,18 @@ public class OrderController {
     }
 
     @PostMapping("/newOrder")
-    public String processOrder(@Valid BurgerOrder burgerOrder, @Valid Address address, Errors error,
-                               Model model) {
+    public String processOrder(@Valid BurgerOrder burgerOrder, @Valid Address address, Errors error) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());
             return "orderForm";
         }
 
-        address = addressService.getEqualsAddressFromBDIfExists(address);
+        address = addressService.getEqualsAddressFromDBIfExists(address);
 
         burgerOrder.addAddress(address);
         orderService.saveOrder(burgerOrder);
         log.info("save the order {}", burgerOrder);
-        model.addAttribute("currentOrder", burgerOrder);
 //        model.addAttribute("burgers", burgerOrder.getBurgers());
         return "currentOrder";
     }

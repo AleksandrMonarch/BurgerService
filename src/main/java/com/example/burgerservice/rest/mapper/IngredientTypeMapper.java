@@ -16,12 +16,27 @@ public class IngredientTypeMapper {
     public IngredientTypeMapper(IngredientTypeRepository ingredientTypeRepository) {
         this.ingredientTypeRepository = ingredientTypeRepository;
     }
-
+//why?
     public IngredientType map(String type) {
         return ingredientTypeRepository.findById(type).orElseThrow(EntityNotFoundException::new);
     }
-
+//why?
     public String map(IngredientType type) {
         return type.getId();
+    }
+
+    public com.example.burgerservice.rest.dto.IngredientType ingredientTypeDao2Dto(IngredientType ingredientTypeDao) {
+        com.example.burgerservice.rest.dto.IngredientType ingredientTypeDto =
+                new com.example.burgerservice.rest.dto.IngredientType();
+        ingredientTypeDto.setId(ingredientTypeDao.getId());
+        ingredientTypeDto.setName(ingredientTypeDao.getName());
+        return ingredientTypeDto;
+    }
+
+    public IngredientType ingredientTypeDto2Dao(com.example.burgerservice.rest.dto.IngredientType ingredientTypeDto) {
+        IngredientType ingredientTypeDao = new IngredientType();
+        ingredientTypeDao.setId(ingredientTypeDto.getId());
+        ingredientTypeDao.setName(ingredientTypeDto.getName().toUpperCase());
+        return ingredientTypeDao;
     }
 }
