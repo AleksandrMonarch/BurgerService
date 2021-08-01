@@ -50,7 +50,9 @@ public class BurgerOrder {
 //    @Digits(integer = 3, message = "not valid ccCVV", fraction = 0)
 //    private String ccCVV;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "burgerOrder")
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
+            orphanRemoval = true, mappedBy = "burgerOrder")
     private List<Burger> burgers = new ArrayList<>();
 
     public void addBurger(Burger burger) {

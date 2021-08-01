@@ -9,7 +9,7 @@ public interface OrderService {
 
     void saveOrder(BurgerOrder burgerOrder);
 
-    List<BurgerOrder> findOrdersByAddress(Address address);
-
     List<BurgerOrder> getAllOrders();
+
+    List<BurgerOrder> getOrdersByAddress(Address address);
 }

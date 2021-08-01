@@ -1,15 +1,11 @@
 package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.Address;
-import com.example.burgerservice.mvc.domain.BurgerOrder;
 import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -28,14 +24,13 @@ public class HomeController {
     }
 
     @PostMapping
-    public String searchOrderByAddress(@Valid Address address, Model model) {
-        List<BurgerOrder> result = orderService.findOrdersByAddress(address);
-        model.addAttribute("searchResult", result);
+    public String  searchOrderByAddress(Address address, Model model) {
+        model.addAttribute("searchResult", orderService.getOrdersByAddress(address));
         return "searchOrderResult";
     }
 
     @ModelAttribute("searchingAddress")
-    public Address getAddress() {
+    public Address getNewAddress() {
         return new Address();
     }
 }

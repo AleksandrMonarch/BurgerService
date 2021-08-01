@@ -12,7 +12,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,7 @@ public class DesignBurgerController {
     }
 
     @PostMapping
-    public String processDesign(@Valid Burger burger, @ModelAttribute BurgerOrder burgerOrder, Errors error) {
+    public String processDesign(Burger burger, BurgerOrder burgerOrder, Errors error, Model model) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());

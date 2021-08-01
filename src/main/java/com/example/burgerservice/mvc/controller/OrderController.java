@@ -1,7 +1,6 @@
 package com.example.burgerservice.mvc.controller;
 
-import com.example.burgerservice.mvc.domain.Address;
-import com.example.burgerservice.mvc.domain.BurgerOrder;
+import com.example.burgerservice.mvc.domain.*;
 import com.example.burgerservice.mvc.service.AddressService;
 import com.example.burgerservice.mvc.service.IngredientService;
 import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
@@ -12,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -33,12 +32,13 @@ public class OrderController {
     }
 
     @GetMapping("/newOrder")
-    public String getOrderForm() {
+    public String getOrderForm(@ModelAttribute BurgerOrder burgerOrder, Model model) {
+        model.addAttribute("burgerOrder", burgerOrder);
         return "orderForm";
     }
 
     @PostMapping("/newOrder")
-    public String processOrder(@Valid BurgerOrder burgerOrder, @Valid Address address, Errors error) {
+    public String processOrder(BurgerOrder burgerOrder, Address address, Errors error) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());
@@ -50,7 +50,6 @@ public class OrderController {
         burgerOrder.addAddress(address);
         orderService.saveOrder(burgerOrder);
         log.info("save the order {}", burgerOrder);
-//        model.addAttribute("burgers", burgerOrder.getBurgers());
         return "currentOrder";
     }
 
@@ -60,7 +59,7 @@ public class OrderController {
     }
 
     @PostMapping("/updateOrder")
-    public String updateOrder(@Valid BurgerOrder burgerOrder, @Valid Address address) {
+    public String updateOrder(BurgerOrder burgerOrder, Address address) {
 
         burgerOrder.addAddress(address);
         orderService.saveOrder(burgerOrder);
@@ -68,19 +67,16 @@ public class OrderController {
         return "currentOrder";
     }
 
-//    @GetMapping("/currentOrder")
-//    public String getBurgersByIngredients(@ModelAttribute BurgerOrder burgerOrder,
-//                                          @Valid List<Ingredient> ingredients, Model model) {
-//        List<Burger> burgers = burgerOrder.getBurgers();
-//        for (Ingredient ingredient : ingredients) {
-//            burgers = burgers.stream()
-//                    .filter(burger -> burger.getIngredients().contains(ingredient))
-//                    .collect(Collectors.toList());
-//
-//        }
-//        model.addAttribute("burgers", burgers);
-//        return "currentOrder";
-//    }
+    @GetMapping("/currentOrder")
+    public String getBurgersByIngredients(
+            @ModelAttribute BurgerOrder burgerOrder,
+            Model model,
+            IngredientListWrapper ingredientListWrapper) {
+
+        model.addAttribute("burgerOrder", burgerOrder);
+        model.addAttribute("ingredientListWrapper", new IngredientListWrapper());
+        return "currentOrder";
+    }
 
     @GetMapping("/getAllOrders")
     public String getAllOrders(Model model) {
@@ -93,10 +89,10 @@ public class OrderController {
         return new Address();
     }
 
-//    @ModelAttribute("ingredients")
-//    public List<Ingredient> getAllIngredients() {
-//        return ingredientService.getAllIngredients();
-//    }
-//}
+    @ModelAttribute("ingredients")
+    public List<Ingredient> getIngredients() {
+        return ingredientService.getAllIngredients();
+    }
+
 }
 

@@ -7,4 +7,6 @@ public interface BurgerOrderService {
     BurgerOrder getBurgerOrder(String id);
 
     BurgerOrder updateBurgerOrder(String id, BurgerOrder newBurgerOrder);
+
+    void deleteBurgerOrderById(String id);
 }

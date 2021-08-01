@@ -27,13 +27,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<BurgerOrder> findOrdersByAddress(Address address) {
-        return orderRepository.findBurgerOrderByAddress_Id(address.hashCode());
-    }
-
-    @Override
     public List<BurgerOrder> getAllOrders() {
         return StreamSupport.stream(orderRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BurgerOrder> getOrdersByAddress(Address address) {
+        return orderRepository.
+                findBurgerOrderByAddress(
+                        address.getStreet(), address.getCity(),
+                        address.getState(), address.getZipNumber());
     }
 }
