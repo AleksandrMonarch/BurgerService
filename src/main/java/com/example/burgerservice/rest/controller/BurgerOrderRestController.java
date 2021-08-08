@@ -5,6 +5,7 @@ import com.example.burgerservice.rest.dto.BurgerOrder;
 import com.example.burgerservice.rest.service.BurgerOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,5 +43,10 @@ public class BurgerOrderRestController {
     public ResponseEntity<BaseResponse> deleteOrder(@PathVariable("orderid") String id) {
         burgerOrderService.deleteBurgerOrderById(id);
         return ResponseEntity.ok(new BaseResponse(String.format("deleted order by id with id = %s", id)));
+    }
+
+    @PutMapping("/cancel/{orderid}")
+    public ResponseEntity<BurgerOrder> cancelOrder(@PathVariable("orderid") String id) {
+        return ResponseEntity.ok(burgerOrderService.cancelOrder(id));
     }
 }

@@ -32,6 +32,6 @@ public class Address {
     @Column(name = "ZIP_NUMBER")
     private String zipNumber;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "address")
+    @OneToMany(orphanRemoval = true, mappedBy = "address", fetch = FetchType.LAZY)
     private List<BurgerOrder> burgerOrders = new ArrayList<>();
 }

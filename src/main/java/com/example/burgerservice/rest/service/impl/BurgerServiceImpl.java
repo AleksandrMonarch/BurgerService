@@ -1,10 +1,12 @@
 package com.example.burgerservice.rest.service.impl;
 
+import com.example.burgerservice.constant.CacheConstants;
 import com.example.burgerservice.mvc.repository.BurgerRepository;
 import com.example.burgerservice.rest.dto.Burger;
 import com.example.burgerservice.rest.mapper.BurgerMapper;
 import com.example.burgerservice.rest.service.BurgerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,6 +24,7 @@ public class BurgerServiceImpl implements BurgerService {
     }
 
     @Override
+    @Cacheable(value = CacheConstants.BURGER, key = "#id")
     public Burger getBurgerById(String id) {
         return burgerMapper.burgerDao2Dto(
                 burgerRepository

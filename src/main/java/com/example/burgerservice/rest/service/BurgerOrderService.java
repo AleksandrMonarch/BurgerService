@@ -9,4 +9,6 @@ public interface BurgerOrderService {
     BurgerOrder updateBurgerOrder(String id, BurgerOrder newBurgerOrder);
 
     void deleteBurgerOrderById(String id);
+
+    BurgerOrder cancelOrder(String id);
 }

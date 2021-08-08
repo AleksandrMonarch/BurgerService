@@ -23,9 +23,6 @@ public class Ingredient {
     @Column(name = "NAME")
     private String name;
 
-//    @Column(name = "TYPE")
-//    private final Type type;
-
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID", referencedColumnName = "ID")
     private IngredientType type;

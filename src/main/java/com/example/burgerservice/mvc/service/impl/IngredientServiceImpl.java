@@ -1,10 +1,12 @@
 package com.example.burgerservice.mvc.service.impl;
 
+import com.example.burgerservice.constant.CacheConstants;
 import com.example.burgerservice.mvc.domain.Ingredient;
 import com.example.burgerservice.mvc.repository.IngredientRepository;
 import com.example.burgerservice.mvc.service.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -29,6 +31,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    @Cacheable(cacheNames = CacheConstants.INGREDIENTS_AND_TYPES)
     public List<Ingredient> getAllIngredients() {
         return ingredientRepository.getAllIngredients();
     }

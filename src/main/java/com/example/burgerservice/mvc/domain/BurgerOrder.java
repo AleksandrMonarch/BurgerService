@@ -31,10 +31,14 @@ public class BurgerOrder {
     @Column(name = "ORDER_NAME")
     private String orderName;
 
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_STATUS_ID", referencedColumnName = "ID")
+    private OrderStatus orderStatus;
+
     @Column(name = "CREATE_AT")
     private LocalDateTime createdAt;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
     private Address address;
 
@@ -52,7 +56,7 @@ public class BurgerOrder {
 
     @OneToMany(
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
-            orphanRemoval = true, mappedBy = "burgerOrder")
+            orphanRemoval = true, mappedBy = "burgerOrder", fetch = FetchType.EAGER)
     private List<Burger> burgers = new ArrayList<>();
 
     public void addBurger(Burger burger) {
@@ -89,6 +93,35 @@ public class BurgerOrder {
         }
         this.address = null;
         address.getBurgerOrders().remove(this);
+    }
+
+    public void addOrderStatus(OrderStatus orderStatus) {
+        if (Objects.isNull(orderStatus)) {
+            log.error("null order status found");
+            return;
+        }
+        this.orderStatus = orderStatus;
+        orderStatus.getBurgerOrders().add(this);
+    }
+
+    public void removeOrderStatus(OrderStatus orderStatus) {
+        if (Objects.isNull(orderStatus)) {
+            log.error("null order status found");
+            return;
+        }
+        this.orderStatus = null;
+        orderStatus.getBurgerOrders().remove(this);
+    }
+
+    //it can be incorrect
+
+    public void changeStatus(OrderStatus newOrderStatus) {
+        if (Objects.isNull(this.orderStatus)) {
+            addOrderStatus(newOrderStatus);
+            return;
+        }
+        removeOrderStatus(this.orderStatus);
+        addOrderStatus(newOrderStatus);
     }
 
     @PrePersist

@@ -21,9 +21,11 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getEqualsAddressFromDBIfExists(Address newAddress) {
 
-        Address oldAddress = addressRepository
-                 .getAddressByStreetEqualsAndCityEqualsAndStateEqualsAndZipNumberEquals(newAddress.getStreet(),
-                         newAddress.getCity(), newAddress.getState(), newAddress.getZipNumber());
+        Address oldAddress = addressRepository.getAddressByStreetEqualsAndCityEqualsAndStateEqualsAndZipNumberEquals(
+                         newAddress.getStreet(),
+                         newAddress.getCity(),
+                         newAddress.getState(),
+                         newAddress.getZipNumber());
         if (Objects.nonNull(oldAddress)) {
             return oldAddress;
         }

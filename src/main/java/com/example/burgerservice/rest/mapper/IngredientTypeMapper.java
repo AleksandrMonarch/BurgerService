@@ -16,11 +16,11 @@ public class IngredientTypeMapper {
     public IngredientTypeMapper(IngredientTypeRepository ingredientTypeRepository) {
         this.ingredientTypeRepository = ingredientTypeRepository;
     }
-//why?
+
     public IngredientType map(String type) {
         return ingredientTypeRepository.findById(type).orElseThrow(EntityNotFoundException::new);
     }
-//why?
+
     public String map(IngredientType type) {
         return type.getId();
     }

@@ -21,7 +21,9 @@ public class IngredientTypeRestController {
     }
 
     @GetMapping("/{ingredienttypeid}")
-    public ResponseEntity<IngredientType> getIngredientType(@PathVariable("ingredientTypeId") String id) {
+    public ResponseEntity<IngredientType> getIngredientType(@PathVariable("ingredienttypeid") String id,
+                                                            @RequestParam String param) {
+        System.out.println(param);
         log.info("response GET method by url /api/ingredientype/{}", id);
         return ResponseEntity.ok(ingredientTypeService.getIngredientType(id));
     }
