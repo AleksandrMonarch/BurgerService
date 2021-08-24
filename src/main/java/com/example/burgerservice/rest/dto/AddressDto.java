@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Address {
+public class AddressDto {
 
     @JsonIgnore
     private String id;

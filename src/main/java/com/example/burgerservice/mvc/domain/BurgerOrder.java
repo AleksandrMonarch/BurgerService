@@ -124,6 +124,15 @@ public class BurgerOrder {
         addOrderStatus(newOrderStatus);
     }
 
+    @Override
+    public String toString() {
+        return "BurgerOrder{" +
+                "id='" + id + '\'' +
+                ", orderName='" + orderName + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
+
     @PrePersist
     public void initializeCreatedDateField() {
         this.createdAt = LocalDateTime.now();

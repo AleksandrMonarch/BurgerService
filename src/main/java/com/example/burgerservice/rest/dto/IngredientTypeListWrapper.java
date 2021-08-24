@@ -11,5 +11,5 @@ import java.util.List;
 @Setter
 public class IngredientTypeListWrapper {
 
-    private List<IngredientType> ingredientTypes;
+    private List<IngredientTypeDto> ingredientTypes;
 }

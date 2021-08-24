@@ -3,9 +3,10 @@ package com.example.burgerservice.mvc.controller;
 import com.example.burgerservice.mvc.domain.*;
 import com.example.burgerservice.mvc.service.AddressService;
 import com.example.burgerservice.mvc.service.IngredientService;
-import com.example.burgerservice.mvc.service.OrderService;
 import com.example.burgerservice.mvc.service.OrderStatusService;
 import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
+import com.example.burgerservice.mvc.utils.service.DevService;
+import com.example.burgerservice.mvc.utils.service.OperationHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,17 +30,23 @@ public class OrderController {
     private final AddressService addressService;
     private final IngredientService ingredientService;
     private final OrderStatusService orderStatusService;
+    private final OperationHistoryService operationHistoryService;
+    private final DevService devService;
 
     @Autowired
     public OrderController(OrderServiceImpl orderService,
                            AddressService addressService,
                            IngredientService ingredientService,
-                           OrderStatusService orderStatusService) {
+                           OrderStatusService orderStatusService,
+                           OperationHistoryService operationHistoryService,
+                           DevService devService) {
 
         this.orderService = orderService;
         this.addressService = addressService;
         this.ingredientService = ingredientService;
         this.orderStatusService = orderStatusService;
+        this.operationHistoryService = operationHistoryService;
+        this.devService = devService;
     }
 
     @GetMapping("/newOrder")
@@ -68,6 +75,9 @@ public class OrderController {
         burgerOrder.addOrderStatus(createdStatus);
         orderService.saveOrder(burgerOrder);
         log.info("save the order {}", burgerOrder);
+
+        operationHistoryService.addRecord("save", "save burger order", burgerOrder);
+
         return "redirect:/orders/currentOrder";
     }
 
@@ -133,12 +143,13 @@ public class OrderController {
 
         orderStatusService.saveAllOrderStatus(orderStatuses);
 
-        // TODO: 06.08.2021 The Big Question!!!!
         OrderStatus createdStatus = orderStatusService.getOrderStatusById("CR");
 
         List<BurgerOrder> burgerOrders = orderService.getAllOrders();
         burgerOrders.forEach(burgerOrder -> burgerOrder.addOrderStatus(createdStatus));
         burgerOrders.forEach(orderService::saveOrder);
+
+        devService.checkProfile();
     }
 
     private List<Burger> getBurgersContainIngredients(BurgerOrder burgerOrder, List<Ingredient> ingredients) {

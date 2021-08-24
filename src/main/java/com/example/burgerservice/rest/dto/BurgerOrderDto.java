@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class BurgerOrder {
+public class BurgerOrderDto {
 
     private String id;
 
@@ -20,7 +20,7 @@ public class BurgerOrder {
     private LocalDateTime createdAt;
 
     @JsonUnwrapped
-    private Address address;
+    private AddressDto address;
 
-    private List<Burger> burgers;
+    private List<BurgerDto> burgers;
 }

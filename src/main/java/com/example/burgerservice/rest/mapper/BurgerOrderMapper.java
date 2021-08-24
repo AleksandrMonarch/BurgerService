@@ -1,12 +1,14 @@
 package com.example.burgerservice.rest.mapper;
 
-import com.example.burgerservice.rest.dto.BurgerOrder;
+import com.example.burgerservice.mvc.domain.BurgerOrder;
+import com.example.burgerservice.rest.dto.BurgerOrderDto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {IngredientTypeMapper.class, OrderStatusMapper.class})
+@Mapper(componentModel = "spring", uses = {IngredientTypeMapper.class,
+        OrderStatusMapper.class, BurgerOrderIdMapper.class})
 public interface BurgerOrderMapper {
 
-    BurgerOrder burgerOrderDao2Dto(com.example.burgerservice.mvc.domain.BurgerOrder burgerOrder);
+    BurgerOrderDto burgerOrderDao2Dto(BurgerOrder burgerOrder);
 
-    com.example.burgerservice.mvc.domain.BurgerOrder burgerOrderDto2Dao(BurgerOrder burgerOrder);
+    BurgerOrder burgerOrderDto2Dao(BurgerOrderDto burgerOrderDto);
 }

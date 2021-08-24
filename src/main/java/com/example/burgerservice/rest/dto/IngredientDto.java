@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class Ingredient {
+public class IngredientDto {
 
     @NotBlank
     private String id;

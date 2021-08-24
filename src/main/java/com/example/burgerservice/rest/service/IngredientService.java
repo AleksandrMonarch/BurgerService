@@ -1,13 +1,11 @@
 package com.example.burgerservice.rest.service;
 
-import com.example.burgerservice.rest.dto.Ingredient;
+import com.example.burgerservice.rest.dto.IngredientDto;
 import com.example.burgerservice.rest.dto.IngredientListWrapper;
-
-import java.util.List;
 
 public interface IngredientService {
 
-    void saveIngredient(Ingredient ingredient);
+    void saveIngredient(IngredientDto ingredientDto);
 
     IngredientListWrapper getAllIngredients();
 }

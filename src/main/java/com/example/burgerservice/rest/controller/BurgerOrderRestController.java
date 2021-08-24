@@ -1,11 +1,10 @@
 package com.example.burgerservice.rest.controller;
 
 import com.example.burgerservice.rest.dto.BaseResponse;
-import com.example.burgerservice.rest.dto.BurgerOrder;
+import com.example.burgerservice.rest.dto.BurgerOrderDto;
 import com.example.burgerservice.rest.service.BurgerOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,17 +25,17 @@ public class BurgerOrderRestController {
     }
 
     @GetMapping("/{orderid}")
-    public ResponseEntity<BurgerOrder> getOrder(@PathVariable("orderid") String id) {
+    public ResponseEntity<BurgerOrderDto> getOrder(@PathVariable("orderid") String id) {
         log.info("response GET method by url /api/order/{}", id);
         return ResponseEntity.ok(burgerOrderService.getBurgerOrder(id));
     }
 
     @PutMapping("/{orderid}")
-    public ResponseEntity<BurgerOrder> updateOrder(
+    public ResponseEntity<BurgerOrderDto> updateOrder(
             @PathVariable("orderid") String id,
-            @RequestBody BurgerOrder burgerOrder) {
-        log.info("response POST method by url /api/order/{} and {} into Request Body", id, burgerOrder);
-        return ResponseEntity.ok(burgerOrderService.updateBurgerOrder(id, burgerOrder));
+            @RequestBody BurgerOrderDto burgerOrderDto) {
+        log.info("response PUT method by url /api/order/{} and {} into Request Body", id, burgerOrderDto);
+        return ResponseEntity.ok(burgerOrderService.updateBurgerOrder(id, burgerOrderDto));
     }
 
     @DeleteMapping("/{orderid}")
@@ -46,7 +45,7 @@ public class BurgerOrderRestController {
     }
 
     @PutMapping("/cancel/{orderid}")
-    public ResponseEntity<BurgerOrder> cancelOrder(@PathVariable("orderid") String id) {
+    public ResponseEntity<BurgerOrderDto> cancelOrder(@PathVariable("orderid") String id) {
         return ResponseEntity.ok(burgerOrderService.cancelOrder(id));
     }
 }

@@ -2,6 +2,7 @@ package com.example.burgerservice.rest.mapper;
 
 import com.example.burgerservice.mvc.domain.IngredientType;
 import com.example.burgerservice.mvc.repository.IngredientTypeRepository;
+import com.example.burgerservice.rest.dto.IngredientTypeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,15 +26,15 @@ public class IngredientTypeMapper {
         return type.getId();
     }
 
-    public com.example.burgerservice.rest.dto.IngredientType ingredientTypeDao2Dto(IngredientType ingredientTypeDao) {
-        com.example.burgerservice.rest.dto.IngredientType ingredientTypeDto =
-                new com.example.burgerservice.rest.dto.IngredientType();
+    public IngredientTypeDto ingredientTypeDao2Dto(IngredientType ingredientTypeDao) {
+        IngredientTypeDto ingredientTypeDto =
+                new IngredientTypeDto();
         ingredientTypeDto.setId(ingredientTypeDao.getId());
         ingredientTypeDto.setName(ingredientTypeDao.getName());
         return ingredientTypeDto;
     }
 
-    public IngredientType ingredientTypeDto2Dao(com.example.burgerservice.rest.dto.IngredientType ingredientTypeDto) {
+    public IngredientType ingredientTypeDto2Dao(IngredientTypeDto ingredientTypeDto) {
         IngredientType ingredientTypeDao = new IngredientType();
         ingredientTypeDao.setId(ingredientTypeDto.getId());
         ingredientTypeDao.setName(ingredientTypeDto.getName().toUpperCase());

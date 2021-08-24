@@ -1,6 +1,6 @@
 package com.example.burgerservice.rest.controller;
 
-import com.example.burgerservice.rest.dto.Burger;
+import com.example.burgerservice.rest.dto.BurgerDto;
 import com.example.burgerservice.rest.service.BurgerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class BurgerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Burger> getBurgerById(@PathVariable String id) {
+    public ResponseEntity<BurgerDto> getBurgerById(@PathVariable String id) {
         log.info("response GET method by url /api/burger/{}" , id);
         return ResponseEntity.ok(burgerService.getBurgerById(id));
     }

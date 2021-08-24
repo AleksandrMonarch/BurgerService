@@ -3,9 +3,9 @@ package com.example.burgerservice.rest.dto;
 import lombok.Data;
 
 @Data
-public class IngredientType {
+public class OrderStatusDto {
 
     private String id;
 
-    private String name;
+    private String status;
 }

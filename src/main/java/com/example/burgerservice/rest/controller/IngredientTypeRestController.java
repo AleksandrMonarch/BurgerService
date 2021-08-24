@@ -1,6 +1,6 @@
 package com.example.burgerservice.rest.controller;
 
-import com.example.burgerservice.rest.dto.IngredientType;
+import com.example.burgerservice.rest.dto.IngredientTypeDto;
 import com.example.burgerservice.rest.dto.IngredientTypeListWrapper;
 import com.example.burgerservice.rest.service.IngredientTypeService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,17 +21,17 @@ public class IngredientTypeRestController {
     }
 
     @GetMapping("/{ingredienttypeid}")
-    public ResponseEntity<IngredientType> getIngredientType(@PathVariable("ingredienttypeid") String id,
-                                                            @RequestParam String param) {
+    public ResponseEntity<IngredientTypeDto> getIngredientType(@PathVariable("ingredienttypeid") String id,
+                                                               @RequestParam String param) {
         System.out.println(param);
         log.info("response GET method by url /api/ingredientype/{}", id);
         return ResponseEntity.ok(ingredientTypeService.getIngredientType(id));
     }
 
 
-    @PostMapping ResponseEntity saveIngredientType(@RequestBody IngredientType ingredientType) {
-        log.info("response POST method by url /api/ingredienttype and {} into Request Body", ingredientType);
-        ingredientTypeService.saveIngredientType(ingredientType);
+    @PostMapping ResponseEntity saveIngredientType(@RequestBody IngredientTypeDto ingredientTypeDto) {
+        log.info("response POST method by url /api/ingredienttype and {} into Request Body", ingredientTypeDto);
+        ingredientTypeService.saveIngredientType(ingredientTypeDto);
         return ResponseEntity.ok().build();
     }
 

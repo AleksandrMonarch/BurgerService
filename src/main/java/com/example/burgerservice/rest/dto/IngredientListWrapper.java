@@ -1,8 +1,6 @@
 package com.example.burgerservice.rest.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.util.List;
@@ -10,7 +8,9 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class IngredientListWrapper {
 
-    private List<Ingredient> ingredients;
+    private List<IngredientDto> ingredients;
 }

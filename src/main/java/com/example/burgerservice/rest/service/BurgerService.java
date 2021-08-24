@@ -1,9 +1,9 @@
 package com.example.burgerservice.rest.service;
 
-import com.example.burgerservice.rest.dto.Burger;
+import com.example.burgerservice.rest.dto.BurgerDto;
 
 
 public interface BurgerService {
 
-    Burger getBurgerById(String id);
+    BurgerDto getBurgerById(String id);
 }

@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1>Orders</h1>
-<div class="burgerOrder_group" id="burgerOrder" th:each="burgerOrder : ${allOrders}">
-  <h2>Order id: <span th:text="${burgerOrder.id}">ORDER ID</span></h2>
-  <h2>Order name: <span th:text="${burgerOrder.orderName}">ORDER NAME</span></h2>
+<div class="burgerOrder_group" id="burgerOrderDto" th:each="burgerOrderDto : ${allOrders}">
+  <h2>Order id: <span th:text="${burgerOrderDto.id}">ORDER ID</span></h2>
+  <h2>Order name: <span th:text="${burgerOrderDto.orderName}">ORDER NAME</span></h2>
     <br>
 </div>
 </body>

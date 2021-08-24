@@ -1,14 +1,14 @@
 package com.example.burgerservice.rest.service;
 
-import com.example.burgerservice.rest.dto.BurgerOrder;
+import com.example.burgerservice.rest.dto.BurgerOrderDto;
 
 public interface BurgerOrderService {
 
-    BurgerOrder getBurgerOrder(String id);
+    BurgerOrderDto getBurgerOrder(String id);
 
-    BurgerOrder updateBurgerOrder(String id, BurgerOrder newBurgerOrder);
+    BurgerOrderDto updateBurgerOrder(String id, BurgerOrderDto newBurgerOrderDto);
 
     void deleteBurgerOrderById(String id);
 
-    BurgerOrder cancelOrder(String id);
+    BurgerOrderDto cancelOrder(String id);
 }
