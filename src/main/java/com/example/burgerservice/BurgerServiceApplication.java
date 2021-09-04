@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 //@EnableScheduling
-//@EnableCaching
+@EnableCaching
 public class BurgerServiceApplication {
 
     public static void main(String[] args) {

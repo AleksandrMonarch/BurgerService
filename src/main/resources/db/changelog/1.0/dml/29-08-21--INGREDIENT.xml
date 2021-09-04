@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_ingredients" author="Aleksandr Tsarev">
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="CHD"/>
+            <column name="NAME" value="Cheddar"/>
+            <column name="TYPE_ID" value="CS"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="PR"/>
+            <column name="NAME" value="Parmesan"/>
+            <column name="TYPE_ID" value="CS"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="BBQ"/>
+            <column name="NAME" value="Barbecue"/>
+            <column name="TYPE_ID" value="SOU"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="CH"/>
+            <column name="NAME" value="Cheese"/>
+            <column name="TYPE_ID" value="SOU"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="BF"/>
+            <column name="NAME" value="Beef"/>
+            <column name="TYPE_ID" value="MT"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="PK"/>
+            <column name="NAME" value="Pork"/>
+            <column name="TYPE_ID" value="MT"/>
+        </insert>
+
+        <insert tableName="INGREDIENT">
+            <column name="ID" value="WS"/>
+            <column name="NAME" value="Wrap with sesame"/>
+            <column name="TYPE_ID" value="WP"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

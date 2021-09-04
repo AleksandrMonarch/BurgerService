@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="order_status" author="Aleksandr Tsarev">
+        <tagDatabase tag="order_status"/>
+    </changeSet>
+
+    <changeSet id="create-table-ORDER_STATUS" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы ORDER_STATUS</comment>
+        <createTable tableName="ORDER_STATUS"
+                     remarks="status of order">
+            <column name="ID" type="VARCHAR2(255)" remarks="order status id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR2(255)" remarks="status name">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="INGREDIENT_TYPE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-ORDER_STATUS" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_ORDER_STATUS"
+                        tableName="ORDER_STATUS"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_ORDER_STATUS"
+                            tableName="ORDER_STATUS"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

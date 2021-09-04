@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="burger" author="Aleksandr Tsarev">
+        <tagDatabase tag="burger"/>
+    </changeSet>
+
+    <changeSet id="create-table-BURGER" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы BURGER</comment>
+        <createTable tableName="BURGER"
+                     remarks="burger of order">
+            <column name="ID" type="VARCHAR2(255)" remarks="burger id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255)" remarks="burger name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORDER_ID" type="VARCHAR2(255)" remarks="order id">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="BURGER"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-BURGER" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_BURGER"
+                        tableName="BURGER"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_BURGER"
+                            tableName="BURGER"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-order_fk-BURGER" author="Aleksandr Tsarev">
+        <addForeignKeyConstraint  baseColumnNames="ORDER_ID"
+                                  baseTableName="BURGER"
+                                  constraintName="ORDER_FK"
+                                  referencedColumnNames="ID"
+                                  referencedTableName="BURGER_ORDER"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="BURGER"
+                                      constraintName="TYPE_FK"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

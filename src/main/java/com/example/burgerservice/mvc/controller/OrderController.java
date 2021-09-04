@@ -14,9 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -130,26 +128,6 @@ public class OrderController {
     @ModelAttribute("ingredients")
     private List<Ingredient> getIngredients() {
         return ingredientService.getAllIngredients();
-    }
-
-    @PostConstruct
-    private void saveAllOrdersStatuses() {
-        List<OrderStatus> orderStatuses = Arrays.asList(
-                new OrderStatus("CR", "Created"),
-                new OrderStatus("IP", "In progress"),
-                new OrderStatus("DN", "Done"),
-                new OrderStatus("CL", "Cancelled")
-        );
-
-        orderStatusService.saveAllOrderStatus(orderStatuses);
-
-        OrderStatus createdStatus = orderStatusService.getOrderStatusById("CR");
-
-        List<BurgerOrder> burgerOrders = orderService.getAllOrders();
-        burgerOrders.forEach(burgerOrder -> burgerOrder.addOrderStatus(createdStatus));
-        burgerOrders.forEach(orderService::saveOrder);
-
-        devService.checkProfile();
     }
 
     private List<Burger> getBurgersContainIngredients(BurgerOrder burgerOrder, List<Ingredient> ingredients) {

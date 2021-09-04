@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,88 +63,6 @@ public class DesignBurgerController {
 
     private List<Ingredient> getIngredientsList() {
         return ingredientServiceImpl.getAllIngredients();
-    }
-
-    @PostConstruct
-    private void saveAllIngredients() {
-
-        IngredientType cheeseType = new IngredientType("CS", "CHEESE");
-        IngredientType souseType = new IngredientType("SOU", "SOUSE");
-        IngredientType meatType = new IngredientType("MT", "MEAT");
-        IngredientType wrapType = new IngredientType("WP", "WRAP");
-
-        List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("CHS", "Cheddar", cheeseType),
-                new Ingredient("PR", "Parmesan", cheeseType),
-                new Ingredient("BBQ", "Barbecue", souseType),
-                new Ingredient("CH", "Cheese", souseType),
-                new Ingredient("BF", "Beef", meatType),
-                new Ingredient("PK", "Pork", meatType),
-                new Ingredient("WS", "Wrap with sesame", wrapType)
-        );
-
-        ingredientServiceImpl.saveIngredients(ingredients);
-
-        Burger burger1 = new Burger();
-        Burger burger2 = new Burger();
-        Burger burger3 = new Burger();
-        Burger burger4 = new Burger();
-
-        burger1.setName("First burger");
-        burger1.addIngredient(ingredients.get(6));
-        burger1.addIngredient(ingredients.get(5));
-        burger1.addIngredient(ingredients.get(0));
-
-        burger2.setName("Second burger");
-        burger2.addIngredient(ingredients.get(6));
-        burger2.addIngredient(ingredients.get(4));
-        burger2.addIngredient(ingredients.get(1));
-
-        burger3.setName("Third burger");
-        burger3.addIngredient(ingredients.get(6));
-        burger3.addIngredient(ingredients.get(4));
-        burger3.addIngredient(ingredients.get(1));
-        burger3.addIngredient(ingredients.get(2));
-
-        burger4.setName("Fourth burger");
-        burger4.addIngredient(ingredients.get(6));
-        burger4.addIngredient(ingredients.get(5));
-        burger4.addIngredient(ingredients.get(1));
-        burger4.addIngredient(ingredients.get(3));
-
-        BurgerOrder order1 = new BurgerOrder();
-        order1.setOrderName("First order");
-        order1.addBurger(burger1);
-        order1.addBurger(burger2);
-
-        Address address1 = new Address();
-        address1.setCity("Saint-Petersburg");
-        address1.setState("Saint-Petersburg");
-        address1.setStreet("Nevsky avenue");
-        address1.setZipNumber("195999");
-
-        address1 = addressService.getEqualsAddressFromDBIfExists(address1);
-
-        order1.addAddress(address1);
-
-        BurgerOrder order2 = new BurgerOrder();
-
-        order2.setOrderName("Second order");
-        order2.addBurger(burger3);
-        order2.addBurger(burger4);
-
-        Address address2 = new Address();
-        address2.setCity("Moscow");
-        address2.setState("Moscow");
-        address2.setStreet("Red Square");
-        address2.setZipNumber("199555");
-
-        address2 = addressService.getEqualsAddressFromDBIfExists(address2);
-
-        order2.addAddress(address2);
-
-        orderService.saveOrder(order1);
-        orderService.saveOrder(order2);
     }
 
 //    Set up in model every type of Ingredient and list of matches Ingredients under this

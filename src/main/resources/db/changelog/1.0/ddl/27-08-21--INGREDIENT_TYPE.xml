@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="ingredient_type" author="Aleksandr Tsarev">
+        <tagDatabase tag="ingredient_type"/>
+    </changeSet>
+
+    <changeSet id="create-table-INGREDIENT_TYPE" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы INGREDIENT_TYPE</comment>
+        <createTable tableName="INGREDIENT_TYPE"
+                     remarks="Types of ingredients">
+            <column name="ID" type="VARCHAR2(255)" remarks="ingredient type id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255)" remarks="ingredient type name">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="INGREDIENT_TYPE"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="create-constraint-pk-INGREDIENT_TYPE" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_INGREDIENT_TYPE"
+                        tableName="INGREDIENT_TYPE"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_INGREDIENT_TYPE"
+                            tableName="INGREDIENT_TYPE"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

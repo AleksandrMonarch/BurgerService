@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_order_statuses" author="Aleksandr Tsarev">
+
+        <insert tableName="ORDER_STATUS">
+            <column name="ID" value="CR"/>
+            <column name="STATUS" value="Created"/>
+        </insert>
+
+        <insert tableName="ORDER_STATUS">
+            <column name="ID" value="IP"/>
+            <column name="STATUS" value="In progress"/>
+        </insert>
+
+        <insert tableName="ORDER_STATUS">
+            <column name="ID" value="DN"/>
+            <column name="STATUS" value="Done"/>
+        </insert>
+
+        <insert tableName="ORDER_STATUS">
+            <column name="ID" value="CL"/>
+            <column name="STATUS" value="Cancelled"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

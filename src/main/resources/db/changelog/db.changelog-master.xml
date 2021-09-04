@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Tsarev Aleksandr">
+        <tagDatabase tag="INITIAL"/>
+    </changeSet>
+
+    <include file="1.0/ddl/27-08-21--INGREDIENT_TYPE.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/29-08-21--INGREDIENT_TYPE.xml" relativeToChangelogFile="true"/>
+
+    <include file="1.0/ddl/27-08-21--INGREDIENT.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/29-08-21--INGREDIENT.xml" relativeToChangelogFile="true"/>
+
+    <include file="1.0/ddl/29-08-21--ORDER_STATUS.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/04-09-21--ORDER_STATUS.xml" relativeToChangelogFile="true"/>
+
+    <include file="1.0/ddl/29-08-21--ADDRESS.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/03-09-21--ADDRESS.xml" relativeToChangelogFile="true"/>
+
+    <include file="1.0/ddl/29-08-21--BURGER_ORDER.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/04-09-21--BURGER_ORDER.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="1.0/ddl/29-08-21--BURGER.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/04-09-21--BURGER.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="1.0/ddl/29-08-21--BURGER_INGREDIENTS.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/dml/04-09-21--BURGER_INGREDIENTS.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="1.0/ddl/29-08-21--UPDATE_INGREDIENT.xml" relativeToChangelogFile="true"/>
+    <include file="1.0/ddl/29-08-21--UPDATE(DELETE) INGREDIENT.xml" relativeToChangelogFile="true"/>
+
+
+</databaseChangeLog>

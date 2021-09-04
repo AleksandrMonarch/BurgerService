@@ -1,5 +1,6 @@
 package com.example.burgerservice.rest.controller;
 
+import com.example.burgerservice.mvc.utils.service.OrderServiceClient;
 import com.example.burgerservice.rest.dto.BaseResponse;
 import com.example.burgerservice.rest.dto.BurgerOrderDto;
 import com.example.burgerservice.rest.service.BurgerOrderService;
@@ -12,16 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(
         value = "/api/order",
+        // TODO: 28.08.2021  what is the problem with this param while performing "getOrderByRestTemplate" method? 63 line
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class BurgerOrderRestController {
 
     private final BurgerOrderService burgerOrderService;
+    private final OrderServiceClient orderServiceClient;
 
     @Autowired
-    public BurgerOrderRestController(BurgerOrderService burgerOrderService) {
+    public BurgerOrderRestController(BurgerOrderService burgerOrderService, OrderServiceClient orderServiceClient) {
         this.burgerOrderService = burgerOrderService;
+        this.orderServiceClient = orderServiceClient;
     }
 
     @GetMapping("/{orderid}")
@@ -47,5 +51,16 @@ public class BurgerOrderRestController {
     @PutMapping("/cancel/{orderid}")
     public ResponseEntity<BurgerOrderDto> cancelOrder(@PathVariable("orderid") String id) {
         return ResponseEntity.ok(burgerOrderService.cancelOrder(id));
+    }
+
+    @PutMapping("/resttemplate/{orderid}")
+    public BurgerOrderDto updateOrderByRestTemplate(@PathVariable("orderid") String id,
+                                          @RequestBody BurgerOrderDto burgerOrderDto) {
+        return orderServiceClient.updateOrder(id, burgerOrderDto);
+    }
+
+    @GetMapping("/resttemplate/{orderid}")
+    public ResponseEntity<BurgerOrderDto> getOrderByRestTemplate(@PathVariable("orderid") String id) {
+        return ResponseEntity.ok(orderServiceClient.getOrder(id));
     }
 }

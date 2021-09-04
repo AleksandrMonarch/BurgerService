@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="burger_ingredients" author="Aleksandr Tsarev">
+        <tagDatabase tag="burger_ingredients"/>
+    </changeSet>
+
+    <changeSet id="create-table-BURGER_INGREDIENTS" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы BURGER_INGREDIENTS</comment>
+        <createTable tableName="BURGER_INGREDIENTS"
+                     remarks="burgers and ingredients">
+            <column name="BURGER_ID" type="VARCHAR2(255)" remarks="burger id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INGREDIENT_ID" type="VARCHAR2(255)" remarks="ingredient id">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="BURGER_INGREDIENTS"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-burger_fk-BURGER_INGREDIENTS" author="Aleksandr Tsarev">
+        <addForeignKeyConstraint  baseColumnNames="BURGER_ID"
+                                  baseTableName="BURGER_INGREDIENTS"
+                                  constraintName="BURGER_FK"
+                                  referencedColumnNames="ID"
+                                  referencedTableName="BURGER"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="BURGER_INGREDIENTS"
+                                      constraintName="BURGER_FK"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-ingredient_fk-BURGER_INGREDIENTS" author="Aleksandr Tsarev">
+        <addForeignKeyConstraint  baseColumnNames="INGREDIENT_ID"
+                                  baseTableName="BURGER_INGREDIENTS"
+                                  constraintName="INGREDIENT_FK"
+                                  referencedColumnNames="ID"
+                                  referencedTableName="INGREDIENT"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="BURGER_INGREDIENTS"
+                                      constraintName="INGREDIENT_FK"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

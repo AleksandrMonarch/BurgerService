@@ -44,8 +44,14 @@ public class IngredientRestController {
         return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 
-    @GetMapping("/checkresttemplate")
+    @GetMapping("/resttemplate/all")
     public ResponseEntity<IngredientListWrapper> getAllIngredientsByRestTemplate() {
         return ResponseEntity.ok(orderServiceClient.getAllIngredients());
+    }
+
+    @PostMapping("/resttemplate/saveingtrdient")
+    public ResponseEntity saveIngredientByRestTemplate(@RequestBody @Valid IngredientDto ingredientDto) {
+        orderServiceClient.saveIngredient(ingredientDto);
+        return ResponseEntity.ok().build();
     }
 }

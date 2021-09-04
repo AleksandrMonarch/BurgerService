@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_addresses" author="Aleksandr Tsarev">
+
+        <insert tableName="ADDRESS">
+            <column name="ID" value="Address1"/>
+            <column name="STREET" value="Nevsky avenue"/>
+            <column name="CITY" value="Saint-Petersburg"/>
+            <column name="STATE" value="Saint-Petersburg"/>
+            <column name="ZIP_NUMBER" value="195999"/>
+        </insert>
+
+        <insert tableName="ADDRESS">
+            <column name="ID" value="Address2"/>
+            <column name="STREET" value="Red Square"/>
+            <column name="CITY" value="Moscow"/>
+            <column name="STATE" value="Moscow"/>
+            <column name="ZIP_NUMBER" value="199555"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

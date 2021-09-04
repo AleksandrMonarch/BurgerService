@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="address" author="Aleksandr Tsarev">
+        <tagDatabase tag="address"/>
+    </changeSet>
+
+    <changeSet id="create-table-ADDRESS" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы ADDRESS</comment>
+        <createTable tableName="ADDRESS"
+                     remarks="order address">
+            <column name="ID" type="VARCHAR2(255)" remarks="address id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STREET" type="VARCHAR2(255)" remarks="street name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CITY" type="VARCHAR2(255)" remarks="city name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATE" type="VARCHAR2(255)" remarks="state name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZIP_NUMBER" type="VARCHAR2(255)" remarks="zip number">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="ADDRESS"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-ADDRESS" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="pk_address"
+                        tableName="ADDRESS"/>
+        <rollback>
+            <dropPrimaryKey constraintName="pk_address"
+                            tableName="ADDRESS"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="ingredient" author="Aleksandr Tsarev">
+        <tagDatabase tag="ingredient"/>
+    </changeSet>
+
+    <changeSet id="create-table-INGREDIENT" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы INGREDIENT</comment>
+        <createTable tableName="INGREDIENT"
+                     remarks="Types of ingredients">
+            <column name="ID" type="VARCHAR2(255)" remarks="ingredient id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255)" remarks="ingredient name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE_ID" type="VARCHAR2(255)" remarks="ingredient type id">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="INGREDIENT"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-INGREDIENT" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_INGREDIENT"
+                        tableName="INGREDIENT"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_INGREDIENT"
+                            tableName="INGREDIENT"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-type_fk-INGREDIENT" author="Aleksandr Tsarev">
+        <addForeignKeyConstraint  baseColumnNames="TYPE_ID"
+                                  baseTableName="INGREDIENT"
+                                  constraintName="TYPE_FK"
+                                  referencedColumnNames="ID"
+                                  referencedTableName="INGREDIENT_TYPE"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="INGREDIENT"
+                                      constraintName="TYPE_FK"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

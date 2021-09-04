@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_ingredient_types" author="Aleksandr Tsarev">
+
+        <insert tableName="INGREDIENT_TYPE">
+            <column name="ID" value="CS"/>
+            <column name="NAME" value="CHEESE"/>
+        </insert>
+
+        <insert tableName="INGREDIENT_TYPE">
+            <column name="ID" value="SOU"/>
+            <column name="NAME" value="SOUSE"/>
+        </insert>
+
+        <insert tableName="INGREDIENT_TYPE">
+            <column name="ID" value="MT"/>
+            <column name="NAME" value="MEAT"/>
+        </insert>
+
+        <insert tableName="INGREDIENT_TYPE">
+            <column name="ID" value="WP"/>
+            <column name="NAME" value="WRAP"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

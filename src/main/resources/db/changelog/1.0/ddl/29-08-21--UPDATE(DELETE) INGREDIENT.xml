@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="drop_column_price_ingredient" author="Aleksandr Tsarev">
+        <tagDatabase tag="update_ingredient"/>
+    </changeSet>
+
+    <changeSet id="update-table-INGREDIENT" author="Aleksandr Tsarev">
+        <comment>Удаление столбца PRICE INGREDIENT</comment>
+        <dropColumn tableName="INGREDIENT" >
+            <column name="PRICE"/>
+        </dropColumn>
+        <rollback>
+            <addColumn tableName="INGREDIENT">
+                <column name="PRICE"
+                        type="DECIMAL"/>
+            </addColumn>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

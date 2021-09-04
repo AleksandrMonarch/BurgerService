@@ -30,6 +30,4 @@ public class OperationHistoryServiceImpl implements OperationHistoryService {
         log.info("save record {}", operationHistory);
         operationHistoryRepository.save(operationHistory);
     }
-
-
 }
