@@ -3,6 +3,7 @@ package com.example.burgerservice.rest.service.impl;
 import com.example.burgerservice.constant.CacheConstants;
 import com.example.burgerservice.mvc.repository.BurgerRepository;
 import com.example.burgerservice.rest.dto.BurgerDto;
+import com.example.burgerservice.rest.exception.BurgerNotFoundException;
 import com.example.burgerservice.rest.mapper.BurgerMapper;
 import com.example.burgerservice.rest.service.BurgerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class BurgerServiceImpl implements BurgerService {
         return burgerMapper.burgerDao2Dto(
                 burgerRepository
                         .findById(id)
-                        .orElseThrow(EntityNotFoundException::new));
+                        .orElseThrow(()->
+                            new BurgerNotFoundException(String.format("Burger with id %s is not found", id))));
     }
 }

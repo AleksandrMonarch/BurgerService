@@ -1,9 +1,7 @@
 package com.example.burgerservice.mvc.controller;
 
 import com.example.burgerservice.mvc.domain.*;
-import com.example.burgerservice.mvc.service.AddressService;
-import com.example.burgerservice.mvc.service.impl.IngredientServiceImpl;
-import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
+import com.example.burgerservice.mvc.service.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,15 +19,12 @@ import java.util.stream.Collectors;
 @SessionAttributes("burgerOrder")
 public class DesignBurgerController {
 
-    private final IngredientServiceImpl ingredientServiceImpl;
-    private final OrderServiceImpl orderService;
-    private final AddressService addressService;
+    private final IngredientService ingredientService;
+
 
     @Autowired
-    public DesignBurgerController(IngredientServiceImpl ingredientService, OrderServiceImpl orderService, AddressService addressService) {
-        this.ingredientServiceImpl = ingredientService;
-        this.orderService = orderService;
-        this.addressService = addressService;
+    public DesignBurgerController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
     }
 
     @GetMapping
@@ -62,7 +57,7 @@ public class DesignBurgerController {
     }
 
     private List<Ingredient> getIngredientsList() {
-        return ingredientServiceImpl.getAllIngredients();
+        return ingredientService.getAllIngredients();
     }
 
 //    Set up in model every type of Ingredient and list of matches Ingredients under this

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: "Burger Service Test"
+
+service:
+    str: Test profile

@@ -6,29 +6,29 @@
     <title>Current order</title>
 </head>
 <body>
-<div class="burgerOrderDto-group" id="burgerOrderDto" th:object="${burgerOrderDto}">
-    <h1>Your order <span th:text="${burgerOrderDto.orderName}">"ORDER NAME"</span> is preparing</h1>
+<div class="burgerOrderDto-group" id="burgerOrderDto" th:object="${burgerOrder}">
+    <h1>Your order <span th:text="${burgerOrder.orderName}">"ORDER NAME"</span> is preparing</h1>
     <h2>Order details</h2>
-    <div class="burgerDto-group" id="orderBurgers" th:each="burgerDto : ${burgers}">
-        <h3>Burger name: <span th:text="${burgerDto.name}">BURGER NAME</span></h3>
-        <div class = "ingredientDto-group" id="burgerIngredient" th:each="intgredient : ${burgerDto.getIngredients()}">
+    <div class="burgerDto-group" id="orderBurgers" th:each="burger : ${burgers}">
+        <h3>Burger name: <span th:text="${burger.name}">BURGER NAME</span></h3>
+        <div class = "ingredientDto-group" id="burgerIngredient" th:each="intgredient : ${burger.getIngredients()}">
             <span th:text="${intgredient.name}">INGREDIENT NAME</span>
         </div>
     </div><br>
     <h2>Order addressDto</h2>
-    <div class="addressDto-group" id="addressDto" th:object="${addressDto}">
-        <h3><span th:text="${addressDto.street}">BURGER NAME</span></h3>
-        <h3><span th:text="${addressDto.city}">BURGER NAME</span></h3>
-        <h3><span th:text="${addressDto.state}">BURGER NAME</span></h3>
-        <h3><span th:text="${addressDto.zipNumber}">BURGER NAME</span></h3>
+    <div class="addressDto-group" id="addressDto" th:object="${address}">
+        <h3><span th:text="${address.street}">BURGER NAME</span></h3>
+        <h3><span th:text="${address.city}">BURGER NAME</span></h3>
+        <h3><span th:text="${address.state}">BURGER NAME</span></h3>
+        <h3><span th:text="${address.zipNumber}">BURGER NAME</span></h3>
     </div>
 </div>
 
 <h2>Show burgers contain ingredients</h2>
 <form method="GET" th:object="${ingredientListWrapper}">
-    <div class="ingredientDto-group" id="ingredientDto" th:each="ingredientDto : ${ingredients}">
-            <input name="ingredients" type="checkbox" th:value="${ingredientDto.id}"/>
-        <span th:text="${ingredientDto.name}">INGREDIENT</span><br/>
+    <div class="ingredientDto-group" id="ingredientDto" th:each="ingredient : ${ingredients}">
+            <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
     </div>
     <button>Show burgers</button>
 </form>

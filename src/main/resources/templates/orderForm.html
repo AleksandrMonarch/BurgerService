@@ -9,12 +9,12 @@
 <body>
 <h1>Your burgerDto is preparing. Let's fill the delivery form</h1>
 <form method="post">
-    <div class="burgerOrderDto-group" id="burgerOrderDto" th:object="${burgerOrderDto}">
+    <div class="burgerOrderDto-group" id="burgerOrderDto" th:object="${burgerOrder}">
         <label for="name">Name</label>
 <!--        There is a problem with field name in burgerDto and burgerOrderDto name-->
         <input type="text" id="name" placeholder="name" th:field="*{orderName}">
     </div>
-    <div class="addressDto-group" id="addressDto" th:object="${addressDto}">
+    <div class="addressDto-group" id="addressDto" th:object="${address}">
         <label for="street">Street</label>
         <input type="text" id="street" placeholder="Street" th:field="*{street}"><br>
         <label for="city">City</label>

@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class IngredientTypeListWrapper {
 
     private List<IngredientTypeDto> ingredientTypes;

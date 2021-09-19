@@ -1,7 +1,7 @@
 package com.example.burgerservice.rest.controller;
 
 import com.example.burgerservice.mvc.utils.service.OrderServiceClient;
-import com.example.burgerservice.rest.dto.BaseResponse;
+import com.example.burgerservice.rest.dto.BaseResponseDto;
 import com.example.burgerservice.rest.dto.BurgerOrderDto;
 import com.example.burgerservice.rest.service.BurgerOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,9 +43,9 @@ public class BurgerOrderRestController {
     }
 
     @DeleteMapping("/{orderid}")
-    public ResponseEntity<BaseResponse> deleteOrder(@PathVariable("orderid") String id) {
+    public ResponseEntity<BaseResponseDto> deleteOrder(@PathVariable("orderid") String id) {
         burgerOrderService.deleteBurgerOrderById(id);
-        return ResponseEntity.ok(new BaseResponse(String.format("deleted order by id with id = %s", id)));
+        return ResponseEntity.ok(new BaseResponseDto(String.format("deleted order by id with id = %s", id)));
     }
 
     @PutMapping("/cancel/{orderid}")
