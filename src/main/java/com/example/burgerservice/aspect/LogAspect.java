@@ -1,6 +1,9 @@
 package com.example.burgerservice.aspect;
 
 import com.example.burgerservice.constant.LogProperties;
+import com.example.burgerservice.rest.client.AuditServiceClient;
+import com.example.burgerservice.rest.dto.BaseResponseDto;
+import com.example.burgerservice.rest.dto.DataRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -17,10 +20,12 @@ import org.springframework.stereotype.Component;
 public class LogAspect {
 
     private final LogProperties logProperties;
+    private final AuditServiceClient auditServiceClient;
 
     @Autowired
-    public LogAspect(LogProperties logProperties) {
+    public LogAspect(LogProperties logProperties, AuditServiceClient auditServiceClient) {
         this.logProperties = logProperties;
+        this.auditServiceClient = auditServiceClient;
     }
 
     @Pointcut("@annotation(com.example.burgerservice.annotation.Log)")
@@ -53,12 +58,17 @@ public class LogAspect {
         }
         stringBuilder.append(String.format("Method %s successfully ended",
                 proceedingJoinPoint.getSignature().getName()));
+        logMessage(stringBuilder.toString());
         return returnValue;
     }
 
     private void logMessage(String message) {
         log.info(message);
-//        sendMessageToREmoteService()
+        sendData(message);
+    }
+
+    private void sendData(String methodData) {
+        BaseResponseDto baseResponseDto = auditServiceClient.sendMethodLogData(new DataRequestDto<>(methodData));
     }
 
     private void setProceedingMethodSignature(StringBuilder stringBuilder, ProceedingJoinPoint proceedingJoinPoint) {
