@@ -1,5 +1,6 @@
 package com.example.burgerservice.job;
 
+import com.example.burgerservice.annotation.Log;
 import com.example.burgerservice.mvc.domain.BurgerOrder;
 import com.example.burgerservice.mvc.domain.OrderStatus;
 import com.example.burgerservice.mvc.repository.OrderRepository;
@@ -27,7 +28,8 @@ public class OrderStatusCheckJob {
         this.orderStatusRepository = orderStatusRepository;
     }
 
-    @Scheduled(fixedDelay = 60000 * 10, initialDelay = 30000)
+    @Log
+    @Scheduled(fixedDelay = 60000, initialDelay = 5000)
     public void changeOrdersStatuses() {
 
         OrderStatus inProgress = orderStatusRepository.getOrderStatusById("IP");

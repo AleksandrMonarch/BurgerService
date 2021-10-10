@@ -93,7 +93,6 @@ public class OrderController {
         return "redirect:/orders/currentOrder";
     }
 
-    //you try to make this works
     @GetMapping("/currentOrder")
     public String getBurgersByIngredients(
             @ModelAttribute BurgerOrder burgerOrder,

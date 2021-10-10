@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="operation-history" author="Aleksandr Tsarev">
+        <tagDatabase tag="operation-history"/>
+    </changeSet>
+
+    <changeSet id="create-table-OPERATION_HISTORY" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы OPERATION_HISTORY</comment>
+        <createTable tableName="OPERATION_HISTORY"
+                     remarks="History of order operations">
+            <column name="ID" type="VARCHAR2(255)" remarks="ingredient id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECORD_TIME" type="TIMESTAMP" remarks="Time of record">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTION_TYPE" type="VARCHAR2(255)" remarks="Type of action">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RAW_DESCRIPTION" type="VARCHAR2(255)" remarks="Short description">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BROAD_DESCRIPTION" type="VARCHAR2(255)" remarks="Full description">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="OPERATION_HISTORY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-OPERATION_HISTORY" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_OPERATION_HISTORY"
+                        tableName="OPERATION_HISTORY"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_OPERATION_HISTORY"
+                            tableName="PK_OPERATION_HISTORY"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

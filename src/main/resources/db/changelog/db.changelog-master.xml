@@ -9,6 +9,8 @@
         <tagDatabase tag="INITIAL"/>
     </changeSet>
 
+    <include file="1.0/ddl/23-09-21--OPERATION_HISTORY.xml" relativeToChangelogFile="true"/>
+
     <include file="1.0/ddl/27-08-21--INGREDIENT_TYPE.xml" relativeToChangelogFile="true"/>
     <include file="1.0/dml/29-08-21--INGREDIENT_TYPE.xml" relativeToChangelogFile="true"/>
 

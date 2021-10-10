@@ -31,3 +31,6 @@ logging:
     org:
       hibernate:
         SQL: trace
+
+log:
+  enabled: false

@@ -6,10 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class BurgerServiceExceptionHandler extends ResponseEntityExceptionHandler {
+public class BurgerServiceExceptionHandler {
 
     @ExceptionHandler(BurgerNotFoundException.class)
     protected ResponseEntity<BaseResponseDto> handleBurgerNotFoundException(
@@ -27,12 +26,12 @@ public class BurgerServiceExceptionHandler extends ResponseEntityExceptionHandle
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    protected ResponseEntity<BaseResponseDto> handleMethodArgumentNotValidException(
-//            MethodArgumentNotValidException methodArgumentNotValidException) {
-//
-//        return new ResponseEntity<>(
-//                new BaseResponseDto(methodArgumentNotValidException.getMessage()),
-//                HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<BaseResponseDto> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException methodArgumentNotValidException) {
+
+        return new ResponseEntity<>(
+                new BaseResponseDto(methodArgumentNotValidException.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

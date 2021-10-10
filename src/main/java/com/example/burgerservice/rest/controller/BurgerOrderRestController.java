@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(
         value = "/api/order",
-        // TODO: 28.08.2021  what is the problem with this param while performing "getOrderByRestTemplate" method? 63 line
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j

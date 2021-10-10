@@ -11,7 +11,7 @@
     <changeSet id="create-table-INGREDIENT" author="Aleksandr Tsarev">
         <comment>Добавление таблицы INGREDIENT</comment>
         <createTable tableName="INGREDIENT"
-                     remarks="Types of ingredients">
+                     remarks="Ingredients">
             <column name="ID" type="VARCHAR2(255)" remarks="ingredient id">
                 <constraints nullable="false"/>
             </column>
@@ -29,7 +29,7 @@
 
     <changeSet id="create-constraint-pk-INGREDIENT" author="Aleksandr Tsarev">
         <addPrimaryKey  columnNames="ID"
-                        constraintName="PK_INGREDIENT"
+                        constraintName="pk"
                         tableName="INGREDIENT"/>
         <rollback>
             <dropPrimaryKey constraintName="PK_INGREDIENT"

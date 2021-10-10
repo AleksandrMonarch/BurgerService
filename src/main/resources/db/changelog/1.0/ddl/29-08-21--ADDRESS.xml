@@ -35,7 +35,7 @@
 
     <changeSet id="create-constraint-pk-ADDRESS" author="Aleksandr Tsarev">
         <addPrimaryKey  columnNames="ID"
-                        constraintName="pk_address"
+                        constraintName="PK_ADDRESS"
                         tableName="ADDRESS"/>
         <rollback>
             <dropPrimaryKey constraintName="pk_address"

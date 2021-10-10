@@ -48,7 +48,6 @@ public class OrderServiceClientImpl implements OrderServiceClient {
         return restTemplate.getForObject(url, IngredientTypeListWrapper.class);
     }
 
-    // TODO: 28.08.2021 fix the problem 
     @Override
     public BurgerOrderDto updateOrder(String id, BurgerOrderDto burgerOrderDto) {
         RestTemplate restTemplate = new RestTemplate();
@@ -67,7 +66,7 @@ public class OrderServiceClientImpl implements OrderServiceClient {
         return restTemplate.exchange(url, HttpMethod.GET, httpEntity, BurgerOrderDto.class).getBody();
     }
 
-    RequestCallback requestCallback(final  BurgerOrderDto burgerOrderDto) {
+    RequestCallback requestCallback(final BurgerOrderDto burgerOrderDto) {
         return clientHttpRequest -> {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(clientHttpRequest.getBody(), burgerOrderDto);
