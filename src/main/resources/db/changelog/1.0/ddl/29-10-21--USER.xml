@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="user" author="Aleksandr Tsarev">
+        <tagDatabase tag="user-table"/>
+    </changeSet>
+
+    <changeSet id="create-table-USER" author="Aleksandr Tsarev">
+        <comment>Добавление таблицы USER</comment>
+        <createTable tableName="USER"
+                     remarks="Users data">
+
+            <column name="ID" type="VARCHAR2(255)" remarks="user id">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="USERNAME" type="VARCHAR2(255)" remarks="USERNAME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="PASSWORD" type="VARCHAR2(255)" remarks="PASSWORD">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="FULLNAME" type="VARCHAR2(255)" remarks="FULLNAME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="STREET" type="VARCHAR2(255)" remarks="STREET">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CITY" type="VARCHAR2(255)" remarks="CITY">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="STATE" type="VARCHAR2(255)" remarks="STATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ZIP" type="VARCHAR2(255)" remarks="ZIP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="PHONENUMBER" type="VARCHAR2(255)" remarks="PHONENUMBER">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <rollback>
+            <dropTable tableName="USER"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-pk-USER" author="Aleksandr Tsarev">
+        <addPrimaryKey  columnNames="ID"
+                        constraintName="PK_USER"
+                        tableName="USER"/>
+        <rollback>
+            <dropPrimaryKey constraintName="PK_USER"
+                            tableName="USER"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

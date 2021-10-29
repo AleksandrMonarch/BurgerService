@@ -38,5 +38,6 @@
     <include file="1.0/ddl/29-08-21--UPDATE_INGREDIENT.xml" relativeToChangelogFile="true"/>
     <include file="1.0/ddl/29-08-21--UPDATE(DELETE) INGREDIENT.xml" relativeToChangelogFile="true"/>
 
+    <include file="1.0/ddl/29-10-21--USER.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
