@@ -7,8 +7,10 @@ import com.example.burgerservice.mvc.service.OrderStatusService;
 import com.example.burgerservice.mvc.service.impl.OrderServiceImpl;
 import com.example.burgerservice.mvc.utils.service.DevService;
 import com.example.burgerservice.mvc.utils.service.OperationHistoryService;
+import com.example.burgerservice.security.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -59,7 +61,8 @@ public class OrderController {
     }
 
     @PostMapping("/newOrder")
-    public String processOrder(BurgerOrder burgerOrder, Address address, Errors error) {
+    public String processOrder(BurgerOrder burgerOrder, Address address, Errors error,
+                               @AuthenticationPrincipal User user) {
 
         if (error.hasErrors()) {
             log.error("there are validation errors {}", error.getFieldErrors());
@@ -71,6 +74,7 @@ public class OrderController {
         address = addressService.getEqualsAddressFromDBIfExists(address);
         burgerOrder.addAddress(address);
         burgerOrder.addOrderStatus(createdStatus);
+        burgerOrder.setUser(user);
         orderService.saveOrder(burgerOrder);
         log.info("save the order {}", burgerOrder);
 

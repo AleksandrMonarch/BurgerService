@@ -37,14 +37,6 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="STATE" type="VARCHAR2(255)" remarks="STATE">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="ZIP" type="VARCHAR2(255)" remarks="ZIP">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="PHONENUMBER" type="VARCHAR2(255)" remarks="PHONENUMBER">
                 <constraints nullable="false"/>
             </column>

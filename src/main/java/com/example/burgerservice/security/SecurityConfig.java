@@ -3,6 +3,7 @@ package com.example.burgerservice.security;
 import org.mapstruct.control.MappingControl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class SecurityConfig {
 
     @Bean
+    @Scope("prototype")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -49,30 +51,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//        return httpSecurity
-//                .authorizeRequests()
-//                .antMatchers("/register", "/login", "/h2-console")
-//                .permitAll()
-//                .antMatchers("/**")
-//                .hasRole("USER")
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .defaultSuccessUrl("/design")
-//                .and()
-//                .build();
-
         return httpSecurity
                 .authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/design", "/orders").hasRole("USER")
+                .antMatchers("/register", "/login", "/h2-console/**", "/swagger-ui/**", "/swagger-ui.html")
+                .permitAll()
+                .antMatchers("/**").hasRole("USER")
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/design")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
                 .and()
-                .csrf()
-                .disable()
+                .headers().frameOptions().disable()
+                .and().csrf().disable()
                 .build();
     }
 }

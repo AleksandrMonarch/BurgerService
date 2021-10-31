@@ -23,6 +23,8 @@
     <include file="1.0/ddl/29-08-21--ADDRESS.xml" relativeToChangelogFile="true"/>
     <include file="1.0/dml/03-09-21--ADDRESS.xml" relativeToChangelogFile="true"/>
 
+    <include file="1.0/ddl/29-10-21--USER.xml" relativeToChangelogFile="true"/>
+
     <include file="1.0/ddl/29-08-21--BURGER_ORDER.xml" relativeToChangelogFile="true"/>
     <include file="1.0/dml/04-09-21--BURGER_ORDER.xml" relativeToChangelogFile="true"/>
 
@@ -37,7 +39,5 @@
 
     <include file="1.0/ddl/29-08-21--UPDATE_INGREDIENT.xml" relativeToChangelogFile="true"/>
     <include file="1.0/ddl/29-08-21--UPDATE(DELETE) INGREDIENT.xml" relativeToChangelogFile="true"/>
-
-    <include file="1.0/ddl/29-10-21--USER.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

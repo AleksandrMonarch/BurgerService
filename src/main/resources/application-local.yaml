@@ -6,7 +6,7 @@ spring:
     name: BurgerService
 
     liquibase:
-      enabled: false
+      enabled: true
       change-log: classpath:db\changelog\db.changelog-master.xml
 
   datasource:
@@ -18,7 +18,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     show-sql: true
 
   h2:
@@ -31,6 +31,7 @@ logging:
     org:
       hibernate:
         SQL: trace
+        type: trace
 
 log:
   enabled: false

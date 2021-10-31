@@ -1,5 +1,6 @@
 package com.example.burgerservice.mvc.domain;
 
+import com.example.burgerservice.security.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,10 @@ public class BurgerOrder {
 
     @Column(name = "ORDER_NAME")
     private String orderName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    private User user;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_STATUS_ID", referencedColumnName = "ID")

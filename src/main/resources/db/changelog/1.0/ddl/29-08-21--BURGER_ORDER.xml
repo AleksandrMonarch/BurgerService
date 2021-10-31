@@ -18,6 +18,9 @@
             <column name="ORDER_NAME" type="VARCHAR2(255)" remarks="order name">
                 <constraints nullable="false"/>
             </column>
+            <column name="USER_ID" type="VARCHAR2(255)" remarks="user id">
+                <constraints nullable="true"/>
+            </column>
             <column name="ORDER_STATUS_ID" type="VARCHAR2(255)" remarks="order status id">
                 <constraints nullable="true"/>
             </column>
@@ -40,6 +43,18 @@
         <rollback>
             <dropPrimaryKey constraintName="PK_BURGER_ORDER"
                             tableName="BURGER_ORDER"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-constraint-user_fk-BURGER_ORDER" author="Aleksandr Tsarev">
+        <addForeignKeyConstraint  baseColumnNames="USER_ID"
+                                  baseTableName="BURGER_ORDER"
+                                  constraintName="USER_FK"
+                                  referencedColumnNames="ID"
+                                  referencedTableName="USER"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="BURGER_ORDER"
+                                      constraintName="USER_FK"/>
         </rollback>
     </changeSet>
 
